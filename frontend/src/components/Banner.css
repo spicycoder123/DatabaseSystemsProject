@@ -1,0 +1,22 @@
+.banner {
+    padding: 20px;
+    background-color: #282c34;
+    color: white;
+    text-align: center;
+}
+
+.banner nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.banner a {
+    color: white;
+    text-decoration: none;
+    font-size: 1.2em;
+}
+
+.banner a:hover {
+    text-decoration: underline;
+}
