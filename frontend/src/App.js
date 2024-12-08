@@ -7,7 +7,7 @@ import RegisterPage from './pages/RegisterPage';
 import ProfilePage from './pages/ProfilePage';
 import SwapsPage from './pages/SwapsPage';
 import RatingsPage from './pages/RatingsPage';
-import RecommendationsPage from './pages/RecommendationsPage';
+import RecommendationsPage from './pages/RecommendationsPage'; 
 import Banner from './components/Banner';
 
 function App() {
