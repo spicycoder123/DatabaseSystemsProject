@@ -21,12 +21,13 @@ function HomePage() {
 
     return (
         <div>
-            <h1>Book Catalog</h1>
+            
             <nav>
                 <Link to="/swaps" style={{ margin: '0 15px' }}>Swaps</Link>
                 <Link to="/ratings" style={{ margin: '0 15px' }}>Ratings</Link>
                 <Link to="/recommendations" style={{ margin: '0 15px' }}>Recommendations</Link>
             </nav>
+            <h1>Book Catalog</h1>
             <BookList books={books} />
         </div>
     );
