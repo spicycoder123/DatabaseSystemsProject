@@ -29,12 +29,15 @@ const userRoutes = require('./routes/userRoutes');
 const ratingRoutes = require('./routes/ratingRoutes');
 const swapRoutes = require('./routes/swapRoutes');
 const bookRoutes = require('./routes/bookRoutes');
+const recommendationsRoutes = require('./routes/recommendationsRoutes');
 
 // Mount routes
 app.use('/api/users', userRoutes);
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/swaps', swapRoutes);
 app.use('/api/books', bookRoutes);
+app.use('/api/recommendations', recommendationsRoutes);
+
 
 // Start the server
 app.listen(port, () => {
