@@ -24,6 +24,11 @@ pool.connect()
     .then(() => console.log('Connected to PostgreSQL database'))
     .catch(err => console.error('Database connection error:', err));
 
+// Export pool for use in route files
+module.exports = {
+    pool,
+};
+
 // Import routes
 const userRoutes = require('./routes/userRoutes');
 const ratingRoutes = require('./routes/ratingRoutes');

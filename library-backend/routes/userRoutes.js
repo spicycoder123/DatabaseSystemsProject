@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../server'); // Assuming `server.js` exports the pool instance
+const { pool } = require('../server'); // Import pool directly
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -17,11 +17,10 @@ const authenticateToken = (req, res, next) => {
     });
 };
 
-// Create a new user (POST)
+// Define routes (only for user-related operations)
 router.post('/users', async (req, res) => {
     const { fname, lname, email, password } = req.body;
     try {
-        // Hash the password before storing it
         const hashedPassword = await bcrypt.hash(password, 10);
 
         const result = await pool.query(
@@ -35,43 +34,8 @@ router.post('/users', async (req, res) => {
     }
 });
 
-// Authenticate a user and issue a token (POST)
-router.post('/login', async (req, res) => {
-    const { email, password } = req.body;
-    try {
-        const result = await pool.query('SELECT * FROM public."user" WHERE email = $1', [email]);
-        if (result.rows.length === 0) {
-            return res.status(400).json({ message: 'Invalid credentials' });
-        }
-
-        const user = result.rows[0];
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            return res.status(400).json({ message: 'Invalid credentials' });
-        }
-
-        // Generate JWT token
-        const accessToken = jwt.sign({ userId: user.userid, email: user.email }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: '1h' });
-        res.json({ accessToken });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
-});
-
-// Get user details by ID (GET)
-router.get('/users/:id', authenticateToken, async (req, res) => {
-    const { id } = req.params;
-    try {
-        const result = await pool.query('SELECT * FROM public."user" WHERE userid = $1', [id]);
-        if (result.rows.length === 0) {
-            return res.status(404).send('User not found');
-        }
-        res.status(200).json(result.rows[0]);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
-});
-
-module.exports = router; // Export the router directly
+// Export both router and middleware separately
+module.exports = {
+    router, // Export the router instance for user routes
+    authenticateToken, // Export the authentication middleware for use in other files
+};

@@ -3,6 +3,8 @@ const router = express.Router();
 const pool = require('../server'); // Assuming `server.js` exports the pool instance
 const { authenticateToken } = require('./userRoutes'); // Import the authentication middleware
 
+console.log('swapRoutes loaded');
+
 // Create a new swap (POST)
 router.post('/swaps', authenticateToken, async (req, res) => {
     const { borrower_id, lender_id, bookid } = req.body;
@@ -63,4 +65,4 @@ router.get('/swaps/:id', authenticateToken, async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = router; // Export the router for use in server.js
