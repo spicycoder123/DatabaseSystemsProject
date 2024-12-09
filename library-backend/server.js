@@ -1,14 +1,14 @@
 const express = require('express');
 require('dotenv').config();
-const { Pool } = require('pg'); // Import the Pool class directly from the pg module
+const { Pool } = require('pg');
 const cors = require('cors');
 
 const app = express();
 const port = process.env.PORT || 5000;
 
 // Middleware
-app.use(express.json()); // Parse incoming JSON
-app.use(cors()); // Enable Cross-Origin Resource Sharing
+app.use(express.json());
+app.use(cors());
 
 // PostgreSQL Pool configuration
 const pool = new Pool({
@@ -37,7 +37,6 @@ app.use('/api/ratings', ratingRoutes);
 app.use('/api/swaps', swapRoutes);
 app.use('/api/books', bookRoutes);
 app.use('/api/recommendations', recommendationsRoutes);
-
 
 // Start the server
 app.listen(port, () => {

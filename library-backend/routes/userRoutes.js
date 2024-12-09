@@ -74,4 +74,4 @@ router.get('/users/:id', authenticateToken, async (req, res) => {
     }
 });
 
-module.exports = router;
+module.exports = router; // Export the router directly
