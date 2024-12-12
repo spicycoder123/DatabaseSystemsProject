@@ -2,7 +2,6 @@ const express = require('express');
 require('dotenv').config();
 const { Pool } = require('pg');
 const cors = require('cors');
-
 const app = express();
 const port = process.env.PORT || 5000;
 
@@ -37,7 +36,7 @@ const bookRoutes = require('./routes/bookRoutes');
 const recommendationsRoutes = require('./routes/recommendationsRoutes');
 
 // Mount routes
-app.use('/api/users', userRoutes);
+app.use('/api/users', userRoutes.router);
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/swaps', swapRoutes);
 app.use('/api/books', bookRoutes);
