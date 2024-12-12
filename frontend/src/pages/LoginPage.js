@@ -1,6 +1,7 @@
+// src/pages/LoginPage.js
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { loginUser } from '../services/api';  // Import the login function
 
 function LoginPage() {
     const [email, setEmail] = useState('');
@@ -10,11 +11,13 @@ function LoginPage() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('/api/auth/login', { email, password });
-            localStorage.setItem('token', response.data.token);
-            navigate('/');
+            const response = await loginUser(email, password);
+            // Store the token in localStorage upon successful login
+            localStorage.setItem('accessToken', response.accessToken);
+            // Redirect to the dashboard or another protected route
+            navigate('/dashboard');
         } catch (error) {
-            console.error('Login error:', error);
+            console.error('Login failed:', error);
             alert('Invalid email or password');
         }
     };

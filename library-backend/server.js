@@ -1,5 +1,5 @@
-const express = require('express');
 require('dotenv').config();
+const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
 const app = express();
@@ -37,6 +37,8 @@ const recommendationsRoutes = require('./routes/recommendationsRoutes');
 
 // Mount routes
 app.use('/api/users', userRoutes.router);
+
+// Add other routes
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/swaps', swapRoutes);
 app.use('/api/books', bookRoutes);
