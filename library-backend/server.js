@@ -4,7 +4,6 @@ const { Pool } = require('pg');
 const cors = require('cors');
 const app = express();
 const port = process.env.PORT || 5000;
-
 // Middleware
 app.use(express.json());
 app.use(cors());
@@ -37,11 +36,11 @@ const recommendationsRoutes = require('./routes/recommendationsRoutes');
 
 // Mount routes
 app.use('/api/users', userRoutes.router);
+app.use('/api', bookRoutes);  
 
 // Add other routes
 app.use('/api/ratings', ratingRoutes);
 app.use('/api/swaps', swapRoutes);
-app.use('/api/books', bookRoutes);
 app.use('/api/recommendations', recommendationsRoutes);
 
 // Start the server

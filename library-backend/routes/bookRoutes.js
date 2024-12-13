@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const pool = require('../server'); // Assuming `server.js` exports the pool instance
+const { pool } = require('../server'); // Import pool correctly from server.js
 
 // CREATE a new book
 router.post('/books', async (req, res) => {

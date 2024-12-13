@@ -1,35 +1,38 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function BookPage() {
-    const { id } = useParams();
-    const [book, setBook] = useState(null);
+    const [books, setBooks] = useState([]);
 
+    // Fetch books from the backend API
     useEffect(() => {
-        const fetchBook = async () => {
+        const fetchBooks = async () => {
             try {
-                const response = await axios.get(`/api/books/${id}`);
-                setBook(response.data);
+                const response = await axios.get('/api/books');  // Replace with the correct endpoint for fetching books
+                setBooks(response.data);
             } catch (error) {
-                console.error('Error fetching book details:', error);
+                console.error('Error fetching books:', error);
             }
         };
 
-        fetchBook();
-    }, [id]);
-
-    if (!book) {
-        return <div>Loading...</div>;
-    }
+        fetchBooks();
+    }, []);
 
     return (
-        <div>
-            <h1>{book.title}</h1>
-            <p>Author: {book.author}</p>
-            <p>Genre: {book.genre}</p>
-            <p>Published: {book.publicationYear}</p>
-            <p>Description: {book.description}</p>
+        <div style={{ backgroundColor: '#f5f5f5', padding: '20px' }}>
+            <h1 style={{ color: '#4b2f14', fontFamily: 'Arial, sans-serif' }}>Book List</h1>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
+                {books.length > 0 ? (
+                    books.map((book) => (
+                        <div key={book.bookid} style={{ backgroundColor: '#ffffff', padding: '15px', borderRadius: '8px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}>
+                            <h3 style={{ margin: '0', color: '#4b2f14' }}>{book.title}</h3>
+                            <p style={{ color: '#555' }}>Author: {book.author}</p>
+                        </div>
+                    ))
+                ) : (
+                    <p>No books found</p>
+                )}
+            </div>
         </div>
     );
 }
