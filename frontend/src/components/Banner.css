@@ -1,22 +1,20 @@
+/* Banner.css */
 .banner {
+    background-color: rgb(235, 88, 52);
+    /* Make the banner easily visible */
     padding: 20px;
-    background-color: #282c34;
-    color: white;
     text-align: center;
+    position: relative;
+    z-index: 1000;
+    /* Ensure it appears above other content */
 }
 
-.banner nav {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-}
-
-.banner a {
-    color: white;
+.nav-link {
+    margin: 0 10px;
     text-decoration: none;
-    font-size: 1.2em;
+    color: #333;
 }
 
-.banner a:hover {
+.nav-link:hover {
     text-decoration: underline;
 }

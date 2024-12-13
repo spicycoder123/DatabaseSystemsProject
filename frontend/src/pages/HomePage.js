@@ -1,34 +1,49 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import BookList from '../components/BookList';
+import React from 'react';
 
 function HomePage() {
-    const [books, setBooks] = useState([]);
-
-    useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const response = await axios.get('/api/books');
-                setBooks(response.data);
-            } catch (error) {
-                console.error('Error fetching books:', error);
-            }
-        };
-
-        fetchBooks();
-    }, []);
+    // Define the updated smaller, cuter ASCII art book
+    const cuteAsciiBookArt = `
+   _______
+  /       \\
+ /  O   O  \\
+            |     ^     |
+            |   \\___/   |   ~*~*~*
+            \\_______/      *~*~*
+            |     |      ~*~*~*
+            |     |     *~*~*~*
+            |     |    
+ /       \\
+/_________\\
+   Thank you for
+ visiting our library!
+    `;
 
     return (
-        <div>
-            
-            <nav>
-                <Link to="/swaps" style={{ margin: '0 15px' }}>Swaps</Link>
-                <Link to="/ratings" style={{ margin: '0 15px' }}>Ratings</Link>
-                <Link to="/recommendations" style={{ margin: '0 15px' }}>Recommendations</Link>
-            </nav>
-            <h1>Book Catalog</h1>
-            <BookList books={books} />
+        <div style={{ textAlign: 'center', marginTop: '50px' }}>
+            {/* Display the updated ASCII art book inside a <pre> tag to preserve formatting */}
+            <pre style={{
+                fontFamily: 'Courier New, Courier, monospace',
+                fontSize: '18px',
+                whiteSpace: 'pre-wrap',  // Allow wrapping while preserving whitespace
+                wordWrap: 'break-word',  // Ensure it breaks lines instead of overflowing
+                textAlign: 'center',
+                margin: '0 auto',
+                maxWidth: '80%',  // Adjust max width to ensure it doesn’t overflow the screen
+                color: '#2c3e50'  // Make the text dark for better readability
+            }}>
+                {cuteAsciiBookArt}
+            </pre>
+
+            {/* Stylish thank you message */}
+            <h2 style={{
+                fontFamily: '"Comic Sans MS", cursive, sans-serif',
+                fontSize: '30px',
+                color: '#FF6347',
+                textShadow: '2px 2px 5px rgba(0, 0, 0, 0.3)',
+                marginTop: '20px'
+            }}>
+                Thank you for visiting our library!
+            </h2>
         </div>
     );
 }
